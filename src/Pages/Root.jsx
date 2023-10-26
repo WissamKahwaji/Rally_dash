@@ -19,10 +19,13 @@ const Root = () => {
     color: "white",
     backgroundColor: colorsData.data.mainColor,
   };
+
   console.log(colorsData, homeData);
+
   const submitStyles = {
     backgroundColor: colorsData.data.mainColor || "white",
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (pass === "Rally@dashboard@123") {
@@ -32,6 +35,7 @@ const Root = () => {
       window.alert("Wrong Credential");
     }
   };
+
   return (
     <div
       className={`min-h-screen flex items-center flex-col justify-center p-1 text-center`}
@@ -42,18 +46,17 @@ const Root = () => {
         className={`w-48 rounded-md mb-2`}
       />
       <h1 className={`text-xl mb-2`}>
-        Welcome To <span>{homeData.data.brandName}</span> Dashboard{" "}
-        {/* <span className={`text-[#7E0945] font-semibold`}>
-          Powered by Sii Media
-        </span> */}
+        Welcome To <span>{homeData.data.brandName}</span> Dashboard
       </h1>
-      <h2>Here Where You Can Add, Edit and Delete Your Exist Cars.</h2>
-      <h3>
-        One Thing More, You Have The Ability To Manage The Bookings Made On Your System.
-      </h3>
-      <p>One Thing Is Required Please Identify Your Self :</p>
+      <div className="mt-4">
+        <ul className="list-disc text-left">
+          <li>{`Here Where You Can Add, Edit and Delete Your Exist Cars.`}</li>
+          <li>{`One Thing More, You Have The Ability To Manage The Bookings Made On Your System.`}</li>
+          <li>{`One Thing Is Required Please Identify Your Self .`}</li>
+        </ul>
+      </div>
       <form onSubmit={submitHandler}>
-        <div className={`flex flex-col items-center justify-center`}>
+        <div className={`flex flex-col items-center justify-center mt-9`}>
           <label htmlFor="id">Type Here Your ID:</label>
           <Input
             input={{
@@ -88,6 +91,7 @@ const Root = () => {
 };
 
 export default Root;
+
 export const rootLoader = async () => {
   const responseColors = await fetch(`${baseURL}/colors`);
   const responseHome = await fetch(`${baseURL}/home`);
