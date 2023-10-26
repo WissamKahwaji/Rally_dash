@@ -43,13 +43,13 @@ const Root = () => {
       />
       <h1 className={`text-xl mb-2`}>
         Welcome To <span>{homeData.data.brandName}</span> Dashboard{" "}
-        <span className={`text-[#7E0945] font-semibold`}>
+        {/* <span className={`text-[#7E0945] font-semibold`}>
           Powered by Sii Media
-        </span>
+        </span> */}
       </h1>
-      <h2>Here Where You Can Add, Edit and Delete Your Exist Products</h2>
+      <h2>Here Where You Can Add, Edit and Delete Your Exist Cars.</h2>
       <h3>
-        One Thing More, You Have The Ability To Check Your Ordered Products
+        One Thing More, You Have The Ability To Manage The Bookings Made On Your System.
       </h3>
       <p>One Thing Is Required Please Identify Your Self :</p>
       <form onSubmit={submitHandler}>
