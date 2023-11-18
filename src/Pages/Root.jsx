@@ -28,7 +28,7 @@ const Root = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (pass === "Rally@dashboard@123") {
+    if (pass === "dashboardRally@123") {
       setIsAuth(true);
     } else {
       setIsAuth(false);
