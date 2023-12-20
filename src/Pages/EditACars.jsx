@@ -8,7 +8,7 @@ const EditACars = () => {
   const colorsData = useSelector((state) => state.colorsSlice);
 
   const liStyle = {
-    background: colorsData.data.mainColor,
+    background: colorsData.data?.mainColor,
   };
   return (
     <PageContainer

@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import { Form } from "react-router-dom";
 import PageContainer from "../Components/UI/PageContainer";
 import { baseURL } from "../API/baseURL";
+import privetApiInstance from "../API/privetApiInstance";
 
 const AddCataOneRates = () => {
   const colorsData = useSelector((state) => state.colorsSlice);
   const submitButtonStyle = {
-    background: colorsData.data.mainColor,
+    background: colorsData.data?.mainColor,
   };
   return (
     <PageContainer>
@@ -57,11 +58,10 @@ export default AddCataOneRates;
 export const addCataOneRatesAction = async ({ request, params }) => {
   const carId = await params.carId;
   const data = await request.formData();
-  const response = await fetch(`${baseURL}/carPage/add-car-rate/${carId}`, {
-    method: "post",
-    body: data,
-  });
-  const r = await response.json();
-  console.log(r);
+  const response = await privetApiInstance.post(
+    `/carPage/add-car-rate/${carId}`,
+    data
+  );
+
   return null;
 };

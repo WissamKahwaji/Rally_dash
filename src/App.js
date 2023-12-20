@@ -36,7 +36,13 @@ import EditOneCarRates, {
   editOneCarRatesAction,
   editOneCarRatesLoader,
 } from "./Pages/EditOneCarRates";
-
+import Services, { servicesLoader, servicesAction } from "./Pages/Services";
+import AboutUs from "./Pages/AboutUs";
+import AddEditService from "./Pages/AddEditService";
+import AddEditAboutUsContent from "./Pages/AddEditAboutUsContent";
+import Inquiries from "./Pages/Inquiries";
+import Cars from "./Pages/Cars";
+import Car from "./Pages/Car";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -118,6 +124,44 @@ const App = () => {
           loader: editOneCarRatesLoader,
           action: editOneCarRatesAction,
           // action: editOneCarAction,
+        },
+        {
+          path: "/controls/services",
+          element: <Services />,
+          loader: servicesLoader,
+          action: servicesAction,
+        },
+        {
+          path: "/controls/cars",
+          element: <Cars />,
+        },
+        {
+          path: "/controls/inquiries",
+          element: <Inquiries />,
+        },
+        {
+          path: "/controls/services/:servicesId/add-service",
+          element: <AddEditService />,
+        },
+        {
+          path: "/controls/services/:servicesId/edit-service/:serviceId",
+          element: <AddEditService />,
+        },
+        {
+          path: "/controls/about-us",
+          element: <AboutUs />,
+        },
+        {
+          path: "/controls/about-us/add-content",
+          element: <AddEditAboutUsContent />,
+        },
+        {
+          path: "/controls/about-us/edit-content/:id",
+          element: <AddEditAboutUsContent />,
+        },
+        {
+          path: "/controls/cars/:id",
+          element: <Car />,
         },
       ],
     },

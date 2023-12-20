@@ -5,35 +5,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { baseURL } from "../API/baseURL";
 import { homeActions } from "../Store/homeSlice";
 import { colorsActions } from "../Store/colorsSlice";
+import { useForm } from "react-hook-form";
+import TextField from "../Components/UI/TextField";
+import SubmittingButton from "../Components/UI/SubmittingButton";
+import { useSignInMutation } from "../API/auth/queries";
 
 const Root = () => {
-  const { dataColors, dataHome } = useLoaderData();
-  const [isAuth, setIsAuth] = useState(false);
-  const [pass, setPass] = useState();
   const dispatch = useDispatch();
+  const { dataColors, dataHome } = useLoaderData();
+  const { mutate: singIn } = useSignInMutation();
+  const {
+    formState: { isSubmitting },
+    register,
+    handleSubmit,
+  } = useForm({
+    defaultValues: { password: "" },
+  });
   dispatch(colorsActions.storeColors(dataColors));
   dispatch(homeActions.storeHome(dataHome));
   const colorsData = useSelector((state) => state.colorsSlice);
   const homeData = useSelector((state) => state.homeSlice);
   const inputStyle = {
     color: "white",
-    backgroundColor: colorsData.data.mainColor,
+    backgroundColor: colorsData.data?.mainColor,
   };
 
   console.log(colorsData, homeData);
 
   const submitStyles = {
-    backgroundColor: colorsData.data.mainColor || "white",
+    backgroundColor: colorsData.data?.mainColor || "white",
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (pass === "dashboardRally@123") {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-      window.alert("Wrong Credential");
-    }
+  const onSignIn = (values) => {
+    singIn(values);
   };
 
   return (
@@ -41,12 +45,12 @@ const Root = () => {
       className={`min-h-screen flex items-center flex-col justify-center p-1 text-center`}
     >
       <img
-        src={homeData.data.logoImg || "src"}
+        src={homeData.data?.logoImg || "src"}
         alt="Logo"
         className={`w-48 rounded-md mb-2`}
       />
       <h1 className={`text-xl mb-2`}>
-        Welcome To <span>{homeData.data.brandName}</span> Dashboard
+        Welcome To <span>{homeData.data?.brandName}</span> Dashboard
       </h1>
       <div className="mt-4">
         <ul className="list-disc text-left">
@@ -55,37 +59,15 @@ const Root = () => {
           <li>{`One Thing Is Required Please Identify Your Self .`}</li>
         </ul>
       </div>
-      <form onSubmit={submitHandler}>
-        <div className={`flex flex-col items-center justify-center mt-9`}>
-          <label htmlFor="id">Type Here Your ID:</label>
-          <Input
-            input={{
-              className: "rounded-lg p-1 mt-2 outline-none mt-4",
-              id: "id",
-              type: "password",
-              value: pass,
-              onChange: (e) => {
-                setPass(e.target.value);
-              },
-            }}
-          />
-          <button
-            style={inputStyle}
-            className={`p-1 bg-transparent mt-2 rounded-lg`}
-          >
-            Submit
-          </button>
-        </div>
+      <form onSubmit={handleSubmit(onSignIn)}>
+        <TextField
+          register={register}
+          name={"password"}
+          label={"password"}
+          type="password"
+        />
+        <SubmittingButton isSubmitting={isSubmitting} />
       </form>
-      {isAuth && (
-        <Link
-          style={submitStyles}
-          className={`flex items-center justify-center mt-2 px-4 py-1 rounded-lg text-2xl text-white`}
-          to="/controls/deleteCars"
-        >
-          Start
-        </Link>
-      )}
     </div>
   );
 };

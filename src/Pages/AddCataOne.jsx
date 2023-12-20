@@ -4,11 +4,12 @@ import { Form, redirect, useLoaderData } from "react-router-dom";
 import Input from "../Components/UI/Input";
 import { useSelector } from "react-redux";
 import { baseURL } from "../API/baseURL";
+import privetApiInstance from "../API/privetApiInstance";
 const AddCataOne = () => {
   const data = useLoaderData();
   const colorsData = useSelector((state) => state.colorsSlice);
   const submitButtonStyle = {
-    background: colorsData.data.mainColor,
+    background: colorsData.data?.mainColor,
   };
   return (
     <PageContainer>
@@ -68,14 +69,10 @@ export const addCataOneAction = async ({ request }) => {
   const data = await request.formData();
   const pageId = data.get("page_id");
   console.log(pageId);
-  const response = await fetch(
-    `${baseURL}/carPage/${pageId}/add-car-to-cat-one`,
-    {
-      method: "post",
-      body: data,
-    }
+  const response = await privetApiInstance.post(
+    `/carPage/${pageId}/add-car-to-cat-one`,
+    data
   );
-  const r = await response.json();
-  console.log(r);
-  return redirect(`${r.data._id}/rates`);
+
+  return redirect(`${response.data.data._id}/rates`);
 };

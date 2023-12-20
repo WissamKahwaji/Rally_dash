@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Input = ({ input }) => {
+const TextField = ({ name, label, register, type = "text" }) => {
   const colorsData = useSelector((state) => state.colorsSlice);
   console.log(colorsData);
   const textStyle = {
@@ -14,17 +14,18 @@ const Input = ({ input }) => {
     border: `1px solid ${colorsData.data?.mainColor || "white"}`,
   };
   return (
-    <div className={`flex flex-col mt-4`}>
-      <label htmlFor={input.id} style={textStyle} className={`text-xl`}>
-        {input.title}
+    <div>
+      <label style={textStyle} className={`flex text-xl gap-2 flex-col mt-4`}>
+        <span>{label}</span>
+        <input
+          type={type}
+          {...register(name)}
+          style={inputStyle}
+          className={`bg-transparent rounded-md p-1 outline-none`}
+        />
       </label>
-      <input
-        {...input}
-        style={inputStyle}
-        className={`bg-transparent rounded-md p-1 outline-none`}
-      />
     </div>
   );
 };
 
-export default Input;
+export default TextField;

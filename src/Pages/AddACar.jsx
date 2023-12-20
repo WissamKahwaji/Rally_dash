@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const AddACar = () => {
   const colorsData = useSelector((state) => state.colorsSlice);
   const liStyle = {
-    background: colorsData.data.mainColor,
+    background: colorsData.data?.mainColor,
   };
   return (
     <PageContainer

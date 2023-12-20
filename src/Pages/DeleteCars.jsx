@@ -2,6 +2,7 @@ import React from "react";
 import { baseURL } from "../API/baseURL";
 import { Form, useLoaderData } from "react-router-dom";
 import PageContainer from "../Components/UI/PageContainer";
+import privetApiInstance from "../API/privetApiInstance";
 
 const DeleteCars = () => {
   const data = useLoaderData();
@@ -51,13 +52,9 @@ export const deleteCarAction = async ({ request }) => {
   const carId = data.get("car_id");
   const pageId = data.get("page_id");
   console.log(carId);
-  const response = await fetch(
-    `${baseURL}/carPage/${pageId}/delete-car/${carId}`,
-    {
-      method: "Delete",
-    }
+  const response = await privetApiInstance.delete(
+    `/carPage/${pageId}/delete-car/${carId}`
   );
-  const responseData = await response.json();
-  console.log(responseData);
-  return responseData;
+
+  return response.data;
 };

@@ -4,13 +4,13 @@ import PageContainer from "../Components/UI/PageContainer";
 import { Form, useLoaderData } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { baseURL } from "../API/baseURL";
-import { wait } from "@testing-library/user-event/dist/utils";
+import privetApiInstance from "../API/privetApiInstance";
 
 const EditOneCarRates = () => {
   const data = useLoaderData();
   const colorsData = useSelector((state) => state.colorsSlice);
   const submitButtonStyle = {
-    background: colorsData.data.mainColor,
+    background: colorsData.data?.mainColor,
   };
   return (
     <PageContainer>
@@ -68,11 +68,10 @@ export const editOneCarRatesLoader = async ({ params }) => {
 export const editOneCarRatesAction = async ({ request, params }) => {
   const carId = params.carId;
   const data = await request.formData();
-  const response = await fetch(`${baseURL}/carPage/edit-car-rate/${carId}`, {
-    method: "put",
-    body: data,
-  });
-  const r = await response.json()
-  console.log(r)
+  const response = await privetApiInstance.put(
+    `/carPage/edit-car-rate/${carId}`,
+    data
+  );
+
   return null;
 };

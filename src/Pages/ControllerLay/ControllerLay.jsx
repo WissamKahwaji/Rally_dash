@@ -6,11 +6,12 @@ const ControllerLay = () => {
   const colorsData = useSelector((state) => state.colorsSlice);
   const homeData = useSelector((state) => state.homeSlice);
   const sideBarStyles = {
-    borderRight: `1px solid ${colorsData.data.mainColor}`,
+    borderRight: `1px solid ${colorsData.data?.mainColor}`,
   };
   const liStyle = {
-    borderBottom: `5px solid ${colorsData.data.mainColor}`,
+    borderBottom: `5px solid ${colorsData.data?.mainColor}`,
   };
+
   return (
     <>
       <div
@@ -19,8 +20,8 @@ const ControllerLay = () => {
       >
         <div>
           <img
-            src={homeData.data.logoImg}
-            alt={homeData.data.brandName}
+            src={homeData.data?.logoImg}
+            alt={homeData.data?.brandName}
             className={`w-32`}
           />
         </div>
@@ -43,6 +44,26 @@ const ControllerLay = () => {
           <li style={liStyle} className={`mb-2 pb-4`}>
             <Link to="" className={`text-white`}>
               Manage The Bookings
+            </Link>
+          </li>
+          <li style={liStyle} className={`mb-2 pb-4`}>
+            <Link to="/controls/cars" className={`text-white`}>
+              Cars
+            </Link>
+          </li>
+          <li style={liStyle} className={`mb-2 pb-4`}>
+            <Link to="/controls/inquiries" className={`text-white`}>
+              Inquiries
+            </Link>
+          </li>
+          <li style={liStyle} className={`mb-2 pb-4`}>
+            <Link to="/controls/services" className={`text-white`}>
+              Services
+            </Link>
+          </li>
+          <li style={liStyle} className={`mb-2 pb-4`}>
+            <Link to="/controls/about-us" className={`text-white`}>
+              About Us
             </Link>
           </li>
         </ul>
