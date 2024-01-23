@@ -72,5 +72,5 @@ export const editOneCarAction = async ({ request, params }) => {
     data
   );
 
-  return redirect(`rates`);
+  return redirect(`/controls/editACars`);
 };

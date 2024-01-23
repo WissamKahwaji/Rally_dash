@@ -43,6 +43,7 @@ import AddEditAboutUsContent from "./Pages/AddEditAboutUsContent";
 import Inquiries from "./Pages/Inquiries";
 import Cars from "./Pages/Cars";
 import Car from "./Pages/Car";
+import Bookings from "./Pages/Bookings";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -138,6 +139,10 @@ const App = () => {
         {
           path: "/controls/inquiries",
           element: <Inquiries />,
+        },
+        {
+          path: "/controls/bookings",
+          element: <Bookings />,
         },
         {
           path: "/controls/services/:servicesId/add-service",

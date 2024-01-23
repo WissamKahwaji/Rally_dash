@@ -42,7 +42,7 @@ const ControllerLay = () => {
             </Link>
           </li>
           <li style={liStyle} className={`mb-2 pb-4`}>
-            <Link to="" className={`text-white`}>
+            <Link to="/controls/bookings" className={`text-white`}>
               Manage The Bookings
             </Link>
           </li>

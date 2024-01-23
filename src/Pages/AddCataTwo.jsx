@@ -74,5 +74,5 @@ export const addCataTwoAction = async ({ request }) => {
     data
   );
 
-  return redirect(`${response.data.data._id}/rates`);
+  return redirect(`/controls/addACar`);
 };
